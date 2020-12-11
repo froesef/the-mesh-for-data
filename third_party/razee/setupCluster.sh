@@ -63,5 +63,13 @@ export CLUSTERNAMEB64=$(echo "{\"name\": \"$CLUSTERNAME\"}" | base64)
 
 cat razeedeploy-delta-install-template.yaml | envsubst | kubectl apply --context $CLUSTERNAME -f -
 
+# wait for the watch-keeper to be ready before continuing
+kubectl wait --for=condition=available -n razeedeploy deployment/watch-keeper --timeout=180s
+kubectl apply -f watch-keeper-non-namespaced.yaml
+
+# restart the watch-keeper pod
+kubectl delete pods $(kubectl get pod -n razeedeploy -l app=watch-keeper -o jsonpath={.items..metadata.name}) -n razeedeploy
+
+
 
 

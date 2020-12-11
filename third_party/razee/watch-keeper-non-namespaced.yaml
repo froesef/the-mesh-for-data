@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  v1_node: lite
+  app.m4d.ibm.com_v1alpha1_blueprint: debug
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-12-11T16:41:44Z"
+  labels:
+    app: watch-keeper
+  name: watch-keeper-non-namespaced
+  namespace: razeedeploy
