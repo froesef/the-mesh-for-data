@@ -131,6 +131,7 @@ status:
     status: Ready
   - name: 04
     status: Ready
+  # status per dataset
   assets:
   - name: m4d-notebook-sample/paysim-csv
     # Endpoint where the asset can be reached. If this was on a different cluster it might point to a different endpoint.

@@ -16,6 +16,7 @@ spec:
   confChart:
     name: ghcr.io/mesh-for-data/afwm:0.1.0
     values: {}
+  # StatusIndicators allow to check status of a non-standard resource that can not be computed by helm/kstatus
   statusIndicators:
   capabilities:
   - capability: write
@@ -30,9 +31,10 @@ spec:
       dataformat: csv
   api:
     endpoint:
+      # Always equals the release name. It is mandatory if this module exposes a common service.
       host: common-arrow-flight-write-service  # This can e.g. be used for multi-user modules
       selector: "mod: common-arrow-flight-write-service"
-      port: 80
+      port: 80 # Mandatory for each service
     protocol: m4d-arrow-flight
     dataformat: arrow
   actions: []

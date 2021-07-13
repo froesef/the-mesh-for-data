@@ -9,6 +9,7 @@ metadata:
 spec:
   chart:
     name: ghcr.io/mesh-for-data/m4d-implicit-copy-batch:0.1.0
+  # StatusIndicators allow to check status of a non-standard resource that can not be computed by helm/kstatus
   statusIndicators:
   - kind: BatchTransfer
     successCondition: status.status == SUCCEEDED
