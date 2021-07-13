@@ -1,0 +1,23 @@
+# This is an example of a module that deploy (secured) ingress/route in a specific cluster.
+# it assumes that an Ingress Controller is already deployed in the cluster.
+apiVersion: app.m4d.ibm.com/v1alpha2
+kind: M4DModule
+metadata:
+  name: multi-cluster-conf
+  namespace: m4d-system
+  labels:
+    version: 0.0.1
+    name: multi-cluster-conf
+spec:
+  chart:
+    name: ghcr.io/mesh-for-data/commin-multi-cluster-conf:0.1.0
+  # StatusIndicators allow to check status of a non-standard resource that can not be computed by helm/kstatus
+  statusIndicators:
+    - kind: Job
+      successCondition: metadata.annotations.configured == SUCCEEDED
+      failureCondition: metadata.annotations.configured == FAILED
+      errorMessage: metadata.annotations.error
+  capabilities:
+  - capability: ingress # on openshift a route will be genereted
+    scope: cluster
+
