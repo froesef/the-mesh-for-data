@@ -26,6 +26,7 @@ spec:
   confChart:
     name: ghcr.io/mesh-for-data/read-module-conf:0.1.0
     values: {}
+  # StatusIndicators allow to check status of a non-standard resource that can not be computed by helm/kstatus
   statusIndicators:
   - kind: ConfigMap
     successCondition: metadata.labels.configured == SUCCEEDED
@@ -41,6 +42,7 @@ spec:
       dataformat: csv
   api:
     endpoint:
+      # Always equals the release name. It is mandatory if this module exposes a common service.
       host: common-arrow-flight-read-service  # This can e.g. be used for multi-user services
       selector: "mod: common-arrow-flight-read-service" # Can be set for multi-user services
       port: 80 # Mandatory for each service

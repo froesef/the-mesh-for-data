@@ -34,6 +34,7 @@ spec:
       level: column
   api:
     endpoint:
+      # Always equals the release name. It is mandatory if this module exposes a common service.
       host: common-transform-arrow-flight  # This can e.g. be used for multi-user modules
       selector: "mod: common-transform-arrow-flight"
       port: 80

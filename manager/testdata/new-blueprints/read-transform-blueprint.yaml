@@ -11,6 +11,7 @@ spec:
     workloadSelector:
       matchLabels:
         app: demoapp
+  # List of modules deployed on the cluster. The modules are deployed in parallel.
   modules:
   # The names are human readable in this example. In the implementation this will differ.
   - name: read-data
@@ -31,6 +32,7 @@ spec:
           bucket: srcbucket
           object: data.parq
     service:
+      # name is the release name. It equals to M4DModule.spec.api.endpoint.host if such defined.
       name: common-arrow-flight-read-service
       assetID: m4d-notebook-sample/paysim-csv # Differentiator to original asset for multi user arrow flight service? How to best specify?
       port: 8080
@@ -47,6 +49,7 @@ spec:
       selector: "mod: common-arrow-flight-read-service" # Selector of the dependency
       connection:
         service:
+          # name is the release name. It equals to M4DModule.spec.api.endpoint.host if such defined.
           name: common-arrow-flight-read-service
           assetID: m4d-notebook-sample/paysim-csv
           port: 8080
@@ -54,6 +57,7 @@ spec:
             protocol: arrow-flight
             dataformat: arrow
     service:
+      # name is the release name. It equals to M4DModule.spec.api.endpoint.host if such defined.
       name: common-transform-arrow-flight
       assetID: m4d-notebook-sample/paysim-csv
       port: 8080
@@ -85,6 +89,7 @@ status:
       status: Ready
     - name: isolation-transform-to-app
       status: Ready
+  # status per dataset
   assets:
   - name: m4d-notebook-sample/paysim-csv
     status: Ready
