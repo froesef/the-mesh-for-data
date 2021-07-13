@@ -14,9 +14,9 @@ spec:
   # StatusIndicators allow to check status of a non-standard resource that can not be computed by helm/kstatus
   statusIndicators:
     - kind: Job
-      successCondition: metadata.annotations.configured == SUCCEEDED
-      failureCondition: metadata.annotations.configured == FAILED
-      errorMessage: metadata.annotations.error
+      successCondition: status.status == SUCCEEDED
+      failureCondition: status.status == FAILED
+      errorMessage: status.error
   capabilities:
   - capability: ingress # on openshift a route will be genereted
     scope: cluster
